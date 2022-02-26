@@ -1,0 +1,14 @@
+digraph G {
+"base_link" -> "camera_link"[label="Broadcaster: /robot_state_publisher\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 53.166 sec old)\nBuffer length: 0.000 sec\n"];
+"odom" -> "base_link"[label="Broadcaster: /gazebo\nAverage rate: 10.233 Hz\nMost recent transform: 53.122 ( 0.044 sec old)\nBuffer length: 4.300 sec\n"];
+"camera_link" -> "kinect_optical"[label="Broadcaster: /robot_state_publisher\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 53.166 sec old)\nBuffer length: 0.000 sec\n"];
+"base_link" -> "back_left_wheel"[label="Broadcaster: /robot_state_publisher\nAverage rate: 47.945 Hz\nMost recent transform: 53.152 ( 0.014 sec old)\nBuffer length: 4.380 sec\n"];
+"base_link" -> "back_right_wheel"[label="Broadcaster: /robot_state_publisher\nAverage rate: 47.945 Hz\nMost recent transform: 53.152 ( 0.014 sec old)\nBuffer length: 4.380 sec\n"];
+"base_link" -> "front_left_wheel"[label="Broadcaster: /robot_state_publisher\nAverage rate: 47.945 Hz\nMost recent transform: 53.152 ( 0.014 sec old)\nBuffer length: 4.380 sec\n"];
+"base_link" -> "front_right_wheel"[label="Broadcaster: /robot_state_publisher\nAverage rate: 47.945 Hz\nMost recent transform: 53.152 ( 0.014 sec old)\nBuffer length: 4.380 sec\n"];
+"map" -> "odom"[label="Broadcaster: /slam_gmapping\nAverage rate: 20.230 Hz\nMost recent transform: 53.173 ( -0.007 sec old)\nBuffer length: 4.350 sec\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 53.166"[ shape=plaintext ] ;
+ }->"map";
+}

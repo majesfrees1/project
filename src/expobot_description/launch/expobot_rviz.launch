@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<launch>
+
+  <param name="robot_description" command="$(find xacro)/xacro.py '$(find expobot_description)/urdf/ugv.xacro'"/>
+
+  
+
+  <!-- Show in Rviz   -->
+  <node name="rviz" pkg="rviz" type="rviz"/>  
+
+</launch>

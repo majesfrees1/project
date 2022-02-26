@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<launch>
+<include file="$(find gazebo_pkg)/launch/expobot_world.launch"/>
+
+<node name="depthimage_to_laserscan" pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" > 
+<param name="output_frame_id" value="camera_link" />
+<remap from="image" to="/camera/depth/image_raw"/>
+</node>
+
+<include file="$(find expo_nav)/launch/gmapping.launch"/>
+
+<!-- <include file="$(find expo_nav)/launch/mybot_teleop.launch"/> /-->
+
+<include file="$(find expobot_description)/launch/expobot_rviz.launch"/>
+
+rosrun teleop_twist_keyboard teleop_twist_keyboard.py
+
+</launch>

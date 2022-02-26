@@ -1,0 +1,380 @@
+<?xml version="1.0" ?>
+  <robot name="ugv">
+
+	<!-- *******Chassis*******/-->
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+          <box size=".45 0.35 0.15"/>
+      </geometry>
+      <material name="gray">
+        <color rgba=".2 .2 .2 1" />
+      </material>
+    </visual>
+  <inertial>
+            <mass value="20" />
+            <inertia ixx="0.04" ixy="0.0" ixz="0" 
+            iyy="0.17" iyz="0" izz="0.25" />
+    </inertial>
+    
+    <collision>
+      <geometry>
+          <box size=".45 0.35 0.15"/>
+      </geometry>
+    </collision>
+  </link>
+
+	<!-- *******WHEELS*******/-->
+	<!-- *******RIGHT WHEELS*******/-->
+
+<!-- *******RIGHT-FRONT WHEEL LINK*******/-->
+  <link name="front_right_wheel">
+    <inertial>
+            <mass value="1" />
+            <inertia ixx="1e-3" ixy="0.0" ixz="0" 
+            iyy="1e-3" iyz="0" izz="1e-3" />
+    </inertial>
+
+    <visual>
+      
+      <geometry>
+          <cylinder radius="0.1" length="0.05"/>
+      </geometry>
+      <material name="white">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+
+    <collision>
+    
+      <geometry>
+          <cylinder radius="0.1" length="0.05"/>
+      </geometry>
+      <contact_coefficients mu="1" kp="1e+13" kd="1.0"/>
+    </collision>
+  </link>
+
+<!-- *******RIGHT-FRONT WHEEL JOINT*******/-->
+		
+  <joint name="front_right_wheel_joint" type="continuous">
+    <origin xyz="0.16 -0.205 -0.03" rpy="1.57 0.0 0.0"/>
+    <parent link="base_link"/>
+    <child link="front_right_wheel"/>
+    <axis xyz="0.0 0.0 1.0"/>
+  </joint>
+
+<!-- *******RIGHT-BACK WHEEL LINK*******/-->
+
+<link name="back_right_wheel">
+    <inertial>
+            <mass value="1" />
+            <inertia ixx="1e-3" ixy="0.0" ixz="0" 
+            iyy="1e-3" iyz="0" izz="1e-3" />
+    </inertial>
+
+    <visual>
+      
+      <geometry>
+          <cylinder radius="0.1" length="0.05"/>
+      </geometry>
+      <material name="white">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+
+    <collision>
+      <geometry>
+          <cylinder radius="0.1" length="0.05"/>
+      </geometry>
+      <contact_coefficients mu="1" kp="1e+13" kd="1.0"/>
+    </collision>
+  </link>
+
+<!-- *******RIGHT-BACK WHEEL JOINT*******/-->
+
+  <joint name="back_right_wheel_joint" type="continuous">
+    <origin xyz="-0.16 -0.205 -0.03" rpy="1.57 0.0 0.0"/>
+    <parent link="base_link"/>
+    <child link="back_right_wheel"/>
+    <axis xyz="0.0 0.0 1.0"/>
+
+  </joint>
+
+<!-- *******LEFT-FRONT WHEEL LINK*******/-->
+
+  <link name="front_left_wheel">
+    <inertial>
+            <mass value="1" />
+            <inertia ixx="1e-3" ixy="0.0" ixz="0" 
+            iyy="1e-3" iyz="0" izz="1e-3" />
+    </inertial>
+
+    <visual>
+      
+      <geometry>
+          <cylinder radius="0.1" length="0.05"/>
+      </geometry>
+      <material name="white">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+
+    <collision>
+      <geometry>
+          <cylinder radius="0.1" length="0.05"/>
+      </geometry>
+      <contact_coefficients mu="1" kp="1e+13" kd="1.0"/>
+    </collision>
+  </link>
+
+<!-- *******LEFT-FRONT WHEEL JOINT*******/-->
+
+  <joint name="front_left_wheel_joint" type="continuous">
+    <origin xyz="0.16 0.205 -0.03" rpy="1.57 0.0 0.0"/>
+    <parent link="base_link"/>
+    <child link="front_left_wheel"/>
+    <axis xyz="0.0 0.0 1.0"/>
+
+  </joint>
+
+<!-- *******LEFT-BACK WHEEL LINK*******/-->
+
+  <link name="back_left_wheel">
+    <inertial>
+            <mass value="1" />
+            <inertia ixx="1e-3" ixy="0.0" ixz="0" 
+            iyy="1e-3" iyz="0" izz="1e-3" />
+    </inertial>
+
+    <visual>
+      
+      <geometry>
+          <cylinder radius="0.1" length="0.05"/>
+      </geometry>
+      <material name="white">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+
+    <collision>
+      <geometry>
+          <cylinder radius="0.1" length="0.05"/>
+      </geometry>
+      <contact_coefficients mu="1" kp="1e+13" kd="1.0"/>
+    </collision>
+  </link>
+
+<!-- *******LEFT-BACK WHEEL JOINT*******/-->
+
+  <joint name="back_left_wheel_joint" type="continuous">
+    <origin xyz="-0.16 0.205 -0.03" rpy="1.57 0.0 0.0"/>
+    <parent link="base_link"/>
+    <child link="back_left_wheel"/>
+    <axis xyz="0.0 0.0 1.0"/>
+
+  </joint>
+
+  
+
+<!-- ++++++++++++++++++  Kinect  +++++++++++++++++++++++++++++ /-->
+<!--kinect joint /-->
+
+<joint name="kinect_joint" type="fixed">
+
+    <origin xyz=".16 0 .075" rpy="0 0 0"/>
+
+    <parent link="base_link"/>
+    <child link="camera_link"/>
+
+</joint>
+
+
+<!--Kinect  Link /-->
+
+<link name="camera_link">
+    
+ <visual>
+
+      <origin xyz="0 0 0.05" rpy="0 0 0"/>
+
+      <geometry>
+
+      <mesh filename="package://expobot_description/meshes/kinect.dae"/>
+
+      </geometry>
+
+ </visual>
+    
+
+ <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+
+    <geometry>
+    <box size="0.1 0.1 0.1"/>
+    </geometry>
+    
+ </collision>
+
+ <inertial>
+     <mass value="1e-5" />
+     <origin xyz="0 0 0" rpy="0 0 0"/>
+     <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+ </inertial>
+
+
+</link>
+
+
+
+<!--  Kinect Optical Link and joints   /-->
+
+<joint name="kinect_optical_joint" type="fixed">
+
+<origin xyz="0 0 0" rpy="-1.5707 0 -1.5707"/> <!-- To invert the coordinates from image convention (Z is forward) to normal xyz /-->
+<parent link="camera_link"/>
+<child link="kinect_optical"/>
+</joint>
+
+<!--Virtual link to project the images to, and then flip it to us as its joint is flipped  /-->
+<link name="kinect_optical">
+</link>
+
+
+<!-- *******GAZEBO*******/-->
+<!-- 
+  <gazebo>
+    <plugin name="object_controller" filename="libgazebo_ros_planar_move.so">
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <odometryRate>20.0</odometryRate>
+      <robotBaseFrame>base_link</robotBaseFrame>
+
+	 <torque>27</torque>
+<publishTf>1</publishTf>
+    </plugin>
+  </gazebo>
+/-->
+<!--
+<gazebo>
+    <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+      <legacyMode>false</legacyMode>
+      <alwaysOn>true</alwaysOn>
+
+      <updateRate>20</updateRate>
+
+      <leftJoint>back_left_wheel_joint</leftJoint>
+      <rightJoint>back_right_wheel_joint</rightJoint>
+
+      <wheelSeparation>0.4</wheelSeparation>
+      <wheelDiameter>0.1</wheelDiameter>
+
+      <torque>20</torque>
+
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <robotBaseFrame>base_link</robotBaseFrame>
+
+    
+      </plugin>
+ </gazebo>
+/-->
+
+    <gazebo>
+        <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
+          <updateRate>10.0</updateRate>
+          <robotNamespace>/</robotNamespace>
+          <leftFrontJoint>front_left_wheel_joint</leftFrontJoint>
+          <rightFrontJoint>front_right_wheel_joint</rightFrontJoint>
+          <leftRearJoint>back_left_wheel_joint</leftRearJoint>
+          <rightRearJoint>back_right_wheel_joint</rightRearJoint>
+          <wheelSeparation>0.8</wheelSeparation>
+          <wheelDiameter>0.3</wheelDiameter>
+          <robotBaseFrame>base_link</robotBaseFrame>
+          <torque>27</torque>
+          <topicName>cmd_vel</topicName>
+          <commandTopic>cmd_vel</commandTopic>
+        
+          <odometryTopic>odom</odometryTopic>
+          <odometryFrame>odom</odometryFrame>
+          <odometrySource>world</odometrySource>
+          <publishTf>1</publishTf>
+          <publishOdomTF>true</publishOdomTF>
+
+          <broadcastTF>true</broadcastTF>
+        </plugin>
+      </gazebo>
+
+
+      <gazebo>
+        <plugin name="joint_state_publisher"
+                filename="libgazebo_ros_joint_state_publisher.so">
+            <jointName>front_left_wheel_joint, front_right_wheel_joint,back_left_wheel_joint,back_right_wheel_joint</jointName>
+        </plugin>
+
+	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <param name="use_gui" value="false"/>
+  </node>
+
+  <!-- Combine joint values -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
+    </gazebo>
+
+
+    <!--  ++++++++++++++++++Kinect Plugin+++++++++++++++++++          /-->
+
+<gazebo reference="camera_link">
+   <sensor type="depth" name="camera">
+
+       <always_on>1</always_on>
+       <visualize>true</visualize> 
+            
+       <camera>
+            <horizontal_fov>1.047</horizontal_fov>  
+            <image>
+                <width>640</width>
+                <height>480</height>
+                <format>R8G8B8</format>
+            </image>
+
+            <clip>
+                <near>0.1</near>
+                <far>100</far>
+            </clip>
+
+       </camera>
+
+       <plugin name="camera_controller" filename="libgazebo_ros_openni_kinect.so">
+             <alwaysOn>true</alwaysOn>
+             <updateRate>10.0</updateRate>
+             <cameraName>camera</cameraName>
+             <frameName>kinect_optical</frameName> 
+             <imageTopicName>rgb/image_raw</imageTopicName>
+             <depthImageTopicName>depth/image_raw</depthImageTopicName>
+             <pointCloudTopicName>depth/points</pointCloudTopicName>
+             <cameraInfoTopicName>rgb/camera_info</cameraInfoTopicName>              
+             <depthImageCameraInfoTopicName>depth/camera_info</depthImageCameraInfoTopicName>            
+             <pointCloudCutoff>0.4</pointCloudCutoff>                
+             <hackBaseline>0.07</hackBaseline>
+             <distortionK1>0.0</distortionK1>
+             <distortionK2>0.0</distortionK2>
+             <distortionK3>0.0</distortionK3>
+             <distortionT1>0.0</distortionT1>
+             <distortionT2>0.0</distortionT2>
+             <CxPrime>0.0</CxPrime>
+             <Cx>0.0</Cx>
+             <Cy>0.0</Cy>
+             <focalLength>0.0</focalLength>
+       </plugin>
+
+    </sensor>
+  </gazebo >
+   
+
+
+
+
+    </robot>
