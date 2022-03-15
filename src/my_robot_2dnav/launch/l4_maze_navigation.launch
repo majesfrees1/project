@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="map_file" default="$(find my_robot_2dnav)/maps/mazemap.yaml"/>
+
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find gazebo_pkg)/world/maze.world"/>
+    </include>
+    
+    <param name="robot_description" command="$(find xacro)/xacro  $(find turtlebot3_description)/urdf/turtlebot3_waffle_pi.urdf.xacro" />
+    
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+        <param name="publish_frequency" type="double" value="50.0" />
+      </node>
+    
+    <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf" args="-urdf -model mybot -param robot_description" />
+    
+      <!-- Map server -->
+  <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)"/>
+   
+  <include file="$(find my_robot_2dnav)/launch/amcl.launch"/>
+
+  <include file="$(find my_robot_2dnav)/launch/move_base.launch"/>
+
+
+  <node pkg="rviz" type="rviz" name="rviz" required="true"  args="-d $(find my_robot_2dnav)/rviz/turtlebot3_navigation.rviz"/>
+
+</launch>
